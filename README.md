@@ -90,7 +90,7 @@ The `Col` component takes the following props:
 * `drift` — (optional, number) shifts the element by n columns. A negative number will drift the column to the left, and a positive to the right. This does not affect surrounding columns.
 * `visible` — (optional, defaults to true, boolean) whether or not this column is visible.
 
-Each property can be overridden for each and any breakpoint. Simply prepend the breakpoint name, to the property name, camel-cased. For example, if you have a `lg` breakpoint, you can use `lgCols`, `lgLeft`, `lgRight`, `lgDrift`, `lgVisible`.
+Each property can be overridden for each and any breakpoint. Simply prepend the breakpoint name, to the property name, camel-cased. The exception is that the breakpoint name is used instead of `cols`. For example, if you have a `lg` breakpoint, you can use `lg`, `lgLeft`, `lgRight`, `lgDrift`, `lgVisible`.
 
 # Grid Settings
 
