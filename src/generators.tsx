@@ -1,7 +1,7 @@
 import { css } from 'styled-components'
 import { ColumnProps, Theme, StyledProps, Breakpoint, VerticalGutterPaddingProps } from './types'
 
-export const columnGenerator = (conf: ColumnProps) => ({ theme }: StyledProps) => {
+export const column = (conf: ColumnProps) => ({ theme }: StyledProps) => {
   let lastSizes = {
     cols: conf.cols || 1,
     drift: conf.drift || undefined,
@@ -67,7 +67,7 @@ export const columnGenerator = (conf: ColumnProps) => ({ theme }: StyledProps) =
     .join('\n')
 }
 
-export const rowGenerator = () => ({ theme }: StyledProps) => {
+export const row = () => ({ theme }: StyledProps) => {
   return theme.grid.breakpoints
     .map(
       breakpoint => `
@@ -96,12 +96,15 @@ export const wrapperGenerator = () => ({ theme }: StyledProps) => {
     .join('\n')
 }
 
-export const columnPadding = (conf: VerticalGutterPaddingProps) => ({ theme }: StyledProps) => {
+export const columnPadding = (conf: VerticalGutterPaddingProps, fromSize?: string) => ({
+  theme
+}: StyledProps) => {
   if (!conf.gutterTop && !conf.gutterBottom) return ''
   let lastDefinedTop = 0
   let lastDefinedBottom = 0
   return theme.grid.breakpoints
     .map(breakpoint => {
+      if (fromSize && breakpoint.name !== fromSize) return ''
       let gutterTop: number = 0
       let gutterBottom: number = 0
       if (conf.gutterTop) {
@@ -227,11 +230,11 @@ export const from = (size: string, callback: BreakpointRenderer) => {
   }
 }
 
-export const queryAt = (size: string) => {
+export const queryAt = (size: string | string[]) => {
   return ({ theme }: StyledProps) => {
     let items = []
     for (let breakpoint of theme.grid.breakpoints) {
-      if (size === breakpoint.name || size.indexOf(breakpoint.name) > -1) {
+      if (size === breakpoint.name || (Array.isArray(size) && size.indexOf(breakpoint.name) > -1)) {
         items.push(breakpoint.rangedQuery)
       }
     }

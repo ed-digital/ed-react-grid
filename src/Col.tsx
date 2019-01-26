@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { columnGenerator, columnPadding } from './generators'
+import { column, columnPadding } from './generators'
 import { basicColumnStyle } from './styles'
 import { ColumnProps, StyledProps } from './types'
 
@@ -12,7 +12,7 @@ export default function Col(props: ColProps) {
 
 const ColStyle = styled.div`
   ${basicColumnStyle}
-  ${(props: ColumnProps & StyledProps) => columnGenerator(props)(props)}
+  ${(props: ColumnProps & StyledProps) => column(props)(props)}
 `
 
 //  ${props => columnPadding(props)(props)}
