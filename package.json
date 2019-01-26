@@ -3,7 +3,7 @@
   "version": "0.9.0",
   "main": "lib/index.js",
   "license": "MIT",
-  "private": "false",
+  "private": false,
   "author": {
     "name": "Daniel Lever",
     "email": "daniel@ed.com.au"
