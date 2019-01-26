@@ -1,8 +1,17 @@
 {
   "name": "@_ed/grid",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "main": "lib/index.js",
   "license": "MIT",
+  "private": "false",
+  "author": {
+    "name": "Daniel Lever",
+    "email": "daniel@ed.com.au"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ed-digital/ed-react-grid.git"
+  },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w"
