@@ -1,4 +1,4 @@
-A simple, yet highly-configurable, responsive *n*-column grid system for React, built with `styled-components` integration and TypeScript support. Supports a mix of static grids (in `px`) and fluid grids (in `vw`) at different resolutions.
+An easy-to-use, responsive *n*-column grid system for React, built with `styled-components` integration and TypeScript support. Supports a mix of static grids (in `px`) and fluid grids (in `vw`) at different resolutions.
 
 # Installation
 

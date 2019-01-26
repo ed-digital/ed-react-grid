@@ -1,5 +1,5 @@
 import { css } from 'styled-components'
-import { ColumnProps, Theme, StyledProps, Breakpoint, VerticalGutterPaddingProps } from './types'
+import { ColumnProps, StyledProps, Breakpoint, VerticalGutterPaddingProps } from './types'
 
 export const column = (conf: ColumnProps) => ({ theme }: StyledProps) => {
   let lastSizes = {
