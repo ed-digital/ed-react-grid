@@ -5,7 +5,7 @@ import { GridContext } from './context'
 
 type Props = {
   grid: Grid
-  children: React.ReactElement<any>
+  children: React.ReactNode
 }
 
 export default function GridProvider(props: Props) {
@@ -13,7 +13,9 @@ export default function GridProvider(props: Props) {
 
   return (
     <GridContext.Provider value={grid}>
-      <ThemeProvider theme={{ grid: grid }}>{props.children}</ThemeProvider>
+      <ThemeProvider theme={{ grid: grid }}>
+        <React.Fragment>{props.children}</React.Fragment>
+      </ThemeProvider>
     </GridContext.Provider>
   )
 }

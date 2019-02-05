@@ -133,8 +133,8 @@ export const columnPadding = (conf: VerticalGutterPaddingProps, fromSize?: strin
       const gutterBottomSize = gutterBottom * breakpoint.size.gutter
       return `
         @media ${breakpoint.query} {
-          ${gutterTopSize && `margin-top: ${gutterTopSize}${breakpoint.units};`}
-          ${gutterBottomSize && `margin-bottom: ${gutterBottomSize}${breakpoint.units};`}
+          ${gutterTopSize ? `margin-top: ${gutterTopSize}${breakpoint.units};` : ''}
+          ${gutterBottomSize ? `margin-bottom: ${gutterBottomSize}${breakpoint.units};` : ''}
         }
       `
     })
