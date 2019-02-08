@@ -214,7 +214,10 @@ export const at = (
   }
 }
 
-export const from = (size: string, callback: BreakpointRenderer) => {
+export const from = (
+  size: string,
+  callback: BreakpointRenderer | ReturnType<typeof css> | string
+) => {
   return ({ theme }: StyledProps) => {
     let active = false
     return css`
@@ -234,7 +237,10 @@ export const from = (size: string, callback: BreakpointRenderer) => {
   }
 }
 
-export const until = (size: string, callback: BreakpointRenderer) => {
+export const until = (
+  size: string,
+  callback: BreakpointRenderer | ReturnType<typeof css> | string
+) => {
   return ({ theme }: StyledProps) => {
     let active = true
     return css`
