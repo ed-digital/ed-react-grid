@@ -7,7 +7,7 @@ export const column = (conf: ColumnProps) => ({ theme }: StyledProps) => {
     drift: conf.drift || undefined,
     left: conf.left || undefined,
     right: conf.right || undefined,
-    visible: conf.visible || true,
+    visible: conf.visible === false ? false : true,
     maxHeight: conf.maxHeight || false
   }
   return theme.grid.breakpoints
@@ -36,6 +36,7 @@ export const column = (conf: ColumnProps) => ({ theme }: StyledProps) => {
         @media ${breakpoint.rangedQuery} {
           width: ${width}${breakpoint.units};
           margin-left: ${breakpoint.size.gutter}${breakpoint.units};
+          display: ${visible ? 'block' : 'none'};
           ${((drift || maxHeight) && 'position: relative;') || ''}
           ${
             typeof left === 'number'
@@ -192,7 +193,10 @@ export const each = (callback: BreakpointRenderer) => {
   }
 }
 
-export const at = (sizes: string[] | string, callback: BreakpointRenderer) => {
+export const at = (
+  sizes: string[] | string,
+  callback: BreakpointRenderer | ReturnType<typeof css> | string
+) => {
   return ({ theme }: StyledProps) => {
     return css`
       ${theme.grid.breakpoints.map(breakpoint => {
@@ -237,7 +241,10 @@ Add 'export const baseline = number|function' to your theme.ts`)
   }
 }
 
-export const from = (size: string, callback: BreakpointRenderer) => {
+export const from = (
+  size: string,
+  callback: BreakpointRenderer | ReturnType<typeof css> | string
+) => {
   return ({ theme }: StyledProps) => {
     let active = false
     return css`
@@ -245,7 +252,30 @@ export const from = (size: string, callback: BreakpointRenderer) => {
         if (!active && size === breakpoint.name) active = true
         if (active) {
           return css`
-            @media ${breakpoint.query} {
+            @media ${breakpoint.rangedQuery} {
+              ${typeof callback === 'function' ? callback(breakpoint) : callback}
+            }
+          `
+        } else {
+          return ''
+        }
+      })}
+    `
+  }
+}
+
+export const until = (
+  size: string,
+  callback: BreakpointRenderer | ReturnType<typeof css> | string
+) => {
+  return ({ theme }: StyledProps) => {
+    let active = true
+    return css`
+      ${theme.grid.breakpoints.map(breakpoint => {
+        if (active && size === breakpoint.name) active = false
+        if (active) {
+          return css`
+            @media ${breakpoint.rangedQuery} {
               ${typeof callback === 'function' ? callback(breakpoint) : callback}
             }
           `

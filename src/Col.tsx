@@ -6,13 +6,7 @@ import { ColumnProps, StyledProps } from './types'
 
 type ColProps = ColumnProps & { children: React.ReactNode }
 
-export default function Col(props: ColProps) {
-  return <ColStyle {...props} />
-}
-
-const ColStyle = styled.div`
+export default styled.div<ColProps>`
   ${basicColumnStyle}
-  ${(props: ColumnProps & StyledProps) => column(props)(props)}
+  ${(props: ColProps & StyledProps) => column(props)(props)}
 `
-
-//  ${props => columnPadding(props)(props)}
