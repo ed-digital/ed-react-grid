@@ -1,3 +1,5 @@
+import { number } from "prop-types";
+
 export type BreakpointDef = {
   at: number | [number, number]
   fluid: boolean
@@ -38,8 +40,11 @@ export type Grid = {
   breakpointsByName: { [index: string]: Breakpoint }
 }
 
+type Baseline<T> = ((props:StyledProps) => T) | T
+
 export type Theme = {
-  grid: Grid
+  grid: Grid,
+  baseline?: Baseline<number>
 }
 
 export type StyledProps = {

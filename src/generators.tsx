@@ -210,6 +210,33 @@ export const at = (sizes: string[] | string, callback: BreakpointRenderer) => {
   }
 }
 
+
+export const rem = (sizeInPixels:number, smart:boolean = false) => {
+  if (smart) {
+    return function (props:StyledProps) : string {
+      const baseline = props.theme.baseline
+
+      // Throw error if baseline has not been set and rem has tried to be set
+      if (!baseline) {
+        throw new Error(`Baseline is required in order to use a smart rem conversion.
+Add 'export const baseline = number|function' to your theme.ts`)
+      } 
+      
+      // Throw an error is baseline is not a number or function
+      if (typeof baseline !== 'number' || typeof baseline !== 'function') {
+        throw new Error(`baseline must of be either a number of function that returns a number`)
+      }
+      
+      
+      if (typeof baseline === 'function') {
+        return (sizeInPixels / (baseline as Function)(props)) + 'rem'
+      } else {
+        return (sizeInPixels / baseline) + 'rem'
+      }
+    }
+  }
+}
+
 export const from = (size: string, callback: BreakpointRenderer) => {
   return ({ theme }: StyledProps) => {
     let active = false
