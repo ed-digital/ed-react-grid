@@ -214,29 +214,29 @@ export const at = (
   }
 }
 
+function typeOf(x: any): string {
+  return typeof x
+}
 
-export const rem = (sizeInPixels:number, smart:boolean = false) => {
-  if (smart) {
-    return function (props:StyledProps) : string {
-      const baseline = props.theme.baseline
+export const rem = (sizeInPixels: number) => {
+  return function(props: StyledProps): string {
+    const baseline = props.theme.baseline
 
-      // Throw error if baseline has not been set and rem has tried to be set
-      if (!baseline) {
-        throw new Error(`Baseline is required in order to use a smart rem conversion.
+    // Throw error if baseline has not been set and rem has tried to be set
+    if (typeof baseline === 'undefined') {
+      throw new Error(`Baseline is required in order to use a smart rem conversion.
 Add 'export const baseline = number|function' to your theme.ts`)
-      } 
-      
-      // Throw an error is baseline is not a number or function
-      if (typeof baseline !== 'number' || typeof baseline !== 'function') {
-        throw new Error(`baseline must of be either a number of function that returns a number`)
-      }
-      
-      
-      if (typeof baseline === 'function') {
-        return (sizeInPixels / (baseline as Function)(props)) + 'rem'
-      } else {
-        return (sizeInPixels / baseline) + 'rem'
-      }
+    }
+
+    // Throw an error is baseline is not a number or function
+    if (typeof baseline !== 'number' && typeof baseline !== 'function') {
+      throw new Error(`baseline must of be either a number of function that returns a number`)
+    }
+
+    if (typeof baseline === 'function') {
+      return sizeInPixels / (baseline as Function)(props) + 'rem'
+    } else {
+      return sizeInPixels / baseline + 'rem'
     }
   }
 }
