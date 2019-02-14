@@ -1,4 +1,5 @@
-import { number } from "prop-types";
+import { number, ReactComponentLike } from 'prop-types'
+import { ReactElement, FunctionComponentElement, FunctionComponent } from 'react'
 
 export type BreakpointDef = {
   at: number | [number, number]
@@ -40,10 +41,10 @@ export type Grid = {
   breakpointsByName: { [index: string]: Breakpoint }
 }
 
-type Baseline<T> = ((props:StyledProps) => T) | T
+type Baseline<T> = ((props: StyledProps) => T) | T
 
 export type Theme = {
-  grid: Grid,
+  grid: Grid
   baseline?: Baseline<number>
 }
 
@@ -63,5 +64,6 @@ export type ColumnProps = {
   drift?: number
   visible?: boolean
   maxHeight?: boolean
+  component?: FunctionComponent<any>
   [other: string]: any
 }

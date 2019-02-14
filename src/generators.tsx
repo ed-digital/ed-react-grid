@@ -214,6 +214,12 @@ export const at = (
   }
 }
 
+function values(prop: string, map: { [size: string]: any }) {
+  return each(breakpoint =>
+    typeof map[breakpoint.name] !== 'undefined' ? `${prop}: ${map[breakpoint.name]};` : null
+  )
+}
+
 function typeOf(x: any): string {
   return typeof x
 }
