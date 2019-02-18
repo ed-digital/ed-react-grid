@@ -14,7 +14,7 @@ export default function Row(props: RowProps) {
   return hasWrapper ? result : <Grid>{result}</Grid>
 }
 
-const RowStyle = styled.div`
+export const RowStyle = styled.div`
   ${basicRowStyle}
   ${row()}
   ${(props: RowProps & StyledProps) => columnPadding(props)(props)}
