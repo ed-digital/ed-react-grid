@@ -1,5 +1,11 @@
 import { css } from 'styled-components'
-import { ColumnProps, StyledProps, Breakpoint, VerticalGutterPaddingProps } from './types'
+import {
+  ColumnProps,
+  StyledProps,
+  Breakpoint,
+  VerticalGutterPaddingProps,
+  BreakpointSizes
+} from './types'
 
 export const column = (conf: ColumnProps) => ({ theme }: StyledProps) => {
   let lastSizes = {
@@ -142,6 +148,13 @@ export const columnPadding = (conf: VerticalGutterPaddingProps, fromSize?: strin
     .join('\n')
 }
 
+export const colProp = (cssProps: string | string[], colProp: keyof BreakpointSizes) => {
+  return each(bp => {
+    const props = typeof cssProps === 'string' ? [cssProps] : cssProps
+    return props.map(cssProp => `${cssProp}: ${bp.size[colProp]}${bp.units};`).join('\n')
+  })
+}
+
 export const absoluteInset = (properties: string[], sizes?: string[]) => ({
   theme
 }: StyledProps) => {
@@ -224,7 +237,7 @@ function typeOf(x: any): string {
   return typeof x
 }
 
-export const rem = (sizeInPixels: number) => {
+export const rem = (...sizes: number[]) => {
   return function(props: StyledProps): string {
     const baseline = props.theme.baseline
 
@@ -240,11 +253,34 @@ Add 'export const baseline = number|function' to your theme.ts`)
     }
 
     if (typeof baseline === 'function') {
-      return sizeInPixels / (baseline as Function)(props) + 'rem'
+      return sizes
+        .map(sizeInPixels => sizeInPixels / (baseline as Function)(props) + 'rem')
+        .join(' ')
     } else {
-      return sizeInPixels / baseline + 'rem'
+      return sizes.map(sizeInPixels => sizeInPixels / baseline + 'rem').join(' ')
     }
   }
+}
+
+export const aspectRatio = (width: number = 1, height: number = 1) => {
+  return css`
+    position: relative;
+
+    &:before {
+      display: block;
+      content: '';
+      width: 100%;
+      padding-top: ${height / width * 100 + ''}%;
+    }
+
+    > * {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+    }
+  `
 }
 
 export const from = (

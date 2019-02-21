@@ -17,6 +17,13 @@ export type GridDef = {
   }
 }
 
+export type BreakpointSizes = {
+  width: number
+  column: number
+  gutter: number
+  padding: number
+}
+
 export type Breakpoint = BreakpointDef & {
   name: string
   columns: number
@@ -27,12 +34,7 @@ export type Breakpoint = BreakpointDef & {
   colWidths: { [index: number]: number }
   units: string
   explicitMax: boolean
-  size: {
-    width: number
-    column: number
-    gutter: number
-    padding: number
-  }
+  size: BreakpointSizes
 }
 
 export type Grid = {

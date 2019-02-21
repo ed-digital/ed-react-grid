@@ -13,7 +13,7 @@ export default function Grid(props: { children: React.ReactNode }) {
   )
 }
 
-const GridStyle = styled.div`
+export const GridStyle = styled.div`
   ${basicGridWrapperStyle}
   ${props => wrapperGenerator()(props)}
 `
