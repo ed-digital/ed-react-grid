@@ -1,5 +1,6 @@
 export const basicColumnStyle = `
   flex: none;
+  position: relative;
 `
 
 export const basicRowStyle = `
