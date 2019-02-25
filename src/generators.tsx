@@ -7,6 +7,11 @@ import {
   BreakpointSizes
 } from './types'
 
+export const when = (propKey: string | ((prop: any) => boolean), styles: any) => {
+  if (typeof propKey === 'function') return (props: any) => (propKey(props) ? styles : '')
+  return (props: any) => (props[propKey] ? styles : '')
+}
+
 export const column = (conf: ColumnProps) => ({ theme }: StyledProps) => {
   let lastSizes = {
     cols: conf.cols || 1,
@@ -270,7 +275,7 @@ export const aspectRatio = (width: number = 1, height: number = 1) => {
       display: block;
       content: '';
       width: 100%;
-      padding-top: ${height / width * 100 + ''}%;
+      padding-top: ${(height / width) * 100 + ''}%;
     }
 
     > * {
