@@ -160,6 +160,15 @@ export const colProp = (cssProps: string | string[], colProp: keyof BreakpointSi
   })
 }
 
+export const withColProp = (
+  columnProperty: keyof BreakpointSizes,
+  fn: (val: string | number, units: string) => any
+) => {
+  return each(bp => {
+    return fn(bp.size[columnProperty], bp.units)
+  })
+}
+
 export const absoluteInset = (properties: string[], sizes?: string[]) => ({
   theme
 }: StyledProps) => {
