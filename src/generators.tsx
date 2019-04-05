@@ -44,7 +44,7 @@ export const column = (conf: ColumnProps) => ({ theme }: StyledProps) => {
       if (right === undefined) right = lastSizes.right
       const width = breakpoint.size.column * value + breakpoint.size.gutter * (value - 1)
       return `
-        @media ${breakpoint.rangeQuery} {
+        @media ${breakpoint.rangedQuery} {
           width: ${width}${breakpoint.units};
           margin-left: ${breakpoint.size.gutter}${breakpoint.units};
           display: ${visible ? 'block' : 'none'};
