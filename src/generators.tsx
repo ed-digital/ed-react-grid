@@ -152,6 +152,93 @@ export const columnPadding = (conf: VerticalGutterPaddingProps, fromSize?: strin
     })
     .join('\n')
 }
+type StringOrNumber = number | string
+
+export interface AcceptMargin {
+  margin?: boolean | number | [StringOrNumber?, StringOrNumber?, StringOrNumber?, StringOrNumber?]
+  [key: string]: any
+}
+export const marginHelper = (props: AcceptMargin & StyledProps) => {
+  let lastMargin = props.margin
+
+  return css(
+    ...props.theme.grid.breakpoints.map(bp => {
+      if (props[`${bp.name}Margin`]) {
+        lastMargin = props[`${bp.name}Margin`]
+      }
+
+      const margin = lastMargin
+      const type = typeof margin
+
+      let style = ''
+
+      if (type === 'number') {
+        style = `margin-bottom: ${rem(margin)(props)};`
+      } else if (type === 'string') {
+        style = `margin-bottom: ${margin};`
+      } else if (Array.isArray(margin)) {
+        const parts = margin.map(s => {
+          if (type === 'number') {
+            style = `${rem(margin)(props)}`
+          } else if (type === 'string') {
+            style = margin
+          }
+        })
+
+        style = `margin: ${parts};`
+      }
+
+      return css`
+        @media ${bp.rangedQuery} {
+          ${style}
+        }
+      `
+    })
+  )
+}
+
+export interface AcceptPadding {
+  padding?: boolean | number | [StringOrNumber?, StringOrNumber?, StringOrNumber?, StringOrNumber?]
+  [key: string]: any
+}
+export const paddingHelper = (props: AcceptPadding & StyledProps) => {
+  let lastPadding = props.padding
+
+  return css(
+    ...props.theme.grid.breakpoints.map(bp => {
+      if (props[`${bp.name}Padding`]) {
+        lastPadding = props[`${bp.name}Padding`]
+      }
+
+      const padding = lastPadding
+      const type = typeof padding
+
+      let style = ''
+
+      if (type === 'number') {
+        style = `padding-bottom: ${rem(padding)(props)};`
+      } else if (type === 'string') {
+        style = `padding-bottom: ${padding};`
+      } else if (Array.isArray(padding)) {
+        const parts = padding.map(s => {
+          if (type === 'number') {
+            style = `${rem(padding)(props)}`
+          } else if (type === 'string') {
+            style = padding
+          }
+        })
+
+        style = `padding: ${parts};`
+      }
+
+      return css`
+        @media ${bp.rangedQuery} {
+          ${style}
+        }
+      `
+    })
+  )
+}
 
 export const colProp = (cssProps: string | string[], colProp: keyof BreakpointSizes) => {
   return each(bp => {
