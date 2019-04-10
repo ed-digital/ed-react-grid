@@ -12,8 +12,10 @@ export default function Grid(props: { children: React.ReactNode }) {
     </WrapperContext.Provider>
   )
 }
+Grid.displayName = 'Grid'
 
 export const GridStyle = styled.div`
   ${basicGridWrapperStyle}
   ${props => wrapperGenerator()(props)}
 `
+GridStyle.displayName = 'GridStyle'

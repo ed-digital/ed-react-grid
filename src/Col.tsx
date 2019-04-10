@@ -17,5 +17,7 @@ export const ColComponent = (props: ColComponentProps) => styled(props.component
   ${basicColumnStyle}
   ${(props: ColProps & StyledProps) => column(props)(props)}
 `
+Col.displayName = 'Col'
+ColComponent.displayName = 'ColComponent'
 
 export default Col

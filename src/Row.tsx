@@ -15,6 +15,7 @@ export default function Row(props: RowProps) {
   const result = <RowStyle {...props} />
   return hasWrapper ? result : <Grid>{result}</Grid>
 }
+Row.displayName = 'Row'
 
 export const RowStyle = styled.div`
   ${basicRowStyle}
@@ -30,3 +31,4 @@ export const RowStyle = styled.div`
       }
     `}
 `
+RowStyle.displayName = 'RowStyle'
