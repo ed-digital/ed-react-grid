@@ -13,8 +13,8 @@
     "url": "https://github.com/ed-digital/ed-react-grid.git"
   },
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w"
+    "build": "tsc  --skipLibCheck",
+    "watch": "tsc -w --skipLibCheck"
   },
   "peerDependencies": {
     "styled-components": "^4.1.3",
