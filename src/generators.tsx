@@ -161,7 +161,9 @@ export interface AcceptMargin {
 export const marginHelper = (props: AcceptMargin & StyledProps) => {
   let lastMargin = props.margin
 
+  // @ts-ignore
   return css(
+    // @ts-ignore
     ...props.theme.grid.breakpoints.map(bp => {
       if (props[`${bp.name}Margin`]) {
         lastMargin = props[`${bp.name}Margin`]
@@ -173,6 +175,7 @@ export const marginHelper = (props: AcceptMargin & StyledProps) => {
       let style = ''
 
       if (type === 'number') {
+        // @ts-ignore
         style = `margin-bottom: ${rem(margin)(props)};`
       } else if (type === 'string') {
         style = `margin-bottom: ${margin};`
@@ -180,6 +183,7 @@ export const marginHelper = (props: AcceptMargin & StyledProps) => {
         const parts = margin.map(s => {
           const pType = typeof s
           if (pType === 'number') {
+            // @ts-ignore
             return `${rem(s)(props)}`
           } else if (pType === 'string') {
             return margin
@@ -205,7 +209,9 @@ export interface AcceptPadding {
 export const paddingHelper = (props: AcceptPadding & StyledProps) => {
   let lastPadding = props.padding
 
+  // @ts-ignore
   return css(
+    // @ts-ignore
     ...props.theme.grid.breakpoints.map(bp => {
       if (props[`${bp.name}Padding`]) {
         lastPadding = props[`${bp.name}Padding`]
@@ -217,6 +223,7 @@ export const paddingHelper = (props: AcceptPadding & StyledProps) => {
       let style = ''
 
       if (type === 'number') {
+        // @ts-ignore
         style = `padding-bottom: ${rem(padding)(props)};`
       } else if (type === 'string') {
         style = `padding-bottom: ${padding};`
@@ -224,6 +231,7 @@ export const paddingHelper = (props: AcceptPadding & StyledProps) => {
         const parts = padding.map(s => {
           const pType = typeof s
           if (pType === 'number') {
+            // @ts-ignore
             return `${rem(s)(props)}`
           } else if (pType === 'string') {
             return padding
