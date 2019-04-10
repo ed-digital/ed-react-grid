@@ -178,14 +178,15 @@ export const marginHelper = (props: AcceptMargin & StyledProps) => {
         style = `margin-bottom: ${margin};`
       } else if (Array.isArray(margin)) {
         const parts = margin.map(s => {
-          if (type === 'number') {
-            style = `${rem(margin)(props)}`
-          } else if (type === 'string') {
-            style = margin
+          const pType = typeof s
+          if (pType === 'number') {
+            return `${rem(s)(props)}`
+          } else if (pType === 'string') {
+            return margin
           }
         })
 
-        style = `margin: ${parts};`
+        style = `margin: ${parts.join(' ')};`
       }
 
       return css`
@@ -221,14 +222,15 @@ export const paddingHelper = (props: AcceptPadding & StyledProps) => {
         style = `padding-bottom: ${padding};`
       } else if (Array.isArray(padding)) {
         const parts = padding.map(s => {
-          if (type === 'number') {
-            style = `${rem(padding)(props)}`
-          } else if (type === 'string') {
-            style = padding
+          const pType = typeof s
+          if (pType === 'number') {
+            return `${rem(s)(props)}`
+          } else if (pType === 'string') {
+            return padding
           }
         })
 
-        style = `padding: ${parts};`
+        style = `padding: ${parts.join(' ')};`
       }
 
       return css`
