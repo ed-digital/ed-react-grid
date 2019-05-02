@@ -202,6 +202,41 @@ export const marginHelper = (props: AcceptMargin & StyledProps) => {
   )
 }
 
+export interface AcceptDisplay {
+  display?: string | boolean
+  [key: string]: any
+}
+export const displayHelper = (props: AcceptDisplay & StyledProps) => {
+  let lastDisplay = props.show
+
+  // @ts-ignore
+  return css(
+    // @ts-ignore
+    ...props.theme.grid.breakpoints.map(bp => {
+      if (typeof props[`${bp.name}Show`] !== 'undefined') {
+        lastDisplay = props[`${bp.name}Show`]
+      }
+
+      const display = typeof lastDisplay == 'string' ? lastDisplay : lastDisplay ? 'block' : 'none'
+      console.log(
+        'Display for',
+        props.index,
+        bp.name,
+        display,
+        'should be',
+        props[`${bp.name}Show`],
+        lastDisplay
+      )
+
+      return `
+        @media ${bp.rangedQuery} {
+          display: ${display};
+        }
+      `
+    })
+  )
+}
+
 export interface AcceptPadding {
   padding?: boolean | number | [StringOrNumber?, StringOrNumber?, StringOrNumber?, StringOrNumber?]
   [key: string]: any
