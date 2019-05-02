@@ -217,6 +217,8 @@ export const displayHelper = (props: AcceptDisplay & StyledProps) => {
         lastDisplay = props[`${bp.name}Show`]
       }
 
+      if (typeof lastDisplay == 'undefined') return ''
+
       const display = typeof lastDisplay == 'string' ? lastDisplay : lastDisplay ? 'block' : 'none'
       console.log(
         'Display for',
